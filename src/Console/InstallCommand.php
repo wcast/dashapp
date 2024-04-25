@@ -1,6 +1,6 @@
 <?php
 
-namespace WCast\Dashapp\Console;
+namespace Wcast\Dashapp\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
