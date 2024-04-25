@@ -73,6 +73,7 @@ trait InstallsInertiaStacks
 
         // Views...
         copy(__DIR__ . '/../../stubs/inertia-vue/resources/views/app.blade.php', resource_path('views/app.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia-vue/resources/views/home.blade.php', resource_path('views/home.blade.php'));
 
         @unlink(resource_path('views/welcome.blade.php'));
 
