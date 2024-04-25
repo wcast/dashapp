@@ -1,0 +1,44 @@
+{
+    "name": "wcast/dashapp",
+    "description": "Painel de controle Genérico",
+    "keywords": ["laravel", "dashboard"],
+    "type": "library",
+    "require": {
+        "php": "^8.2.0",
+        "laravel/breeze": "^2.0",
+        "lucascudo/laravel-pt-br-localization": "^2.1",
+        "illuminate/console": "^11.0",
+        "illuminate/filesystem": "^11.0",
+        "illuminate/support": "^11.0",
+        "illuminate/validation": "^11.0",
+        "symfony/console": "^7.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Wcast\\Dashapp\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Wcast\\Dashapp\\DashServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Rogério Lopes",
+            "email": "rogerio.wcast@gmail.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
