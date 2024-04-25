@@ -5,6 +5,8 @@ namespace Wcast\Dashapp\Console;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 use Symfony\Component\Console\Input\InputInterface;
@@ -45,9 +47,69 @@ class InstallCommand extends Command implements PromptsForMissingInput
         return $this->installInertiaVueStack();
     }
 
+    /**
+     * Install the given middleware names into the application.
+     *
+     * @param  array|string  $name
+     * @param  string  $group
+     * @param  string  $modifier
+     * @return void
+     */
+    protected function installMiddleware($names, $group = 'web', $modifier = 'append')
+    {
+        $bootstrapApp = file_get_contents(base_path('bootstrap/app.php'));
+
+        $names = collect(Arr::wrap($names))
+            ->filter(fn ($name) => ! Str::contains($bootstrapApp, $name))
+            ->whenNotEmpty(function ($names) use ($bootstrapApp, $group, $modifier) {
+                $names = $names->map(fn ($name) => "$name")->implode(','.PHP_EOL.'            ');
+
+                $bootstrapApp = str_replace(
+                    '->withMiddleware(function (Middleware $middleware) {',
+                    '->withMiddleware(function (Middleware $middleware) {'
+                    .PHP_EOL."        \$middleware->$group($modifier: ["
+                    .PHP_EOL."            $names,"
+                    .PHP_EOL.'        ]);'
+                    .PHP_EOL,
+                    $bootstrapApp,
+                );
+
+                file_put_contents(base_path('bootstrap/app.php'), $bootstrapApp);
+            });
+    }
+
+    /**
+     * Install the given middleware aliases into the application.
+     *
+     * @param  array  $aliases
+     * @return void
+     */
+    protected function installMiddlewareAliases($aliases)
+    {
+        $bootstrapApp = file_get_contents(base_path('bootstrap/app.php'));
+
+        $aliases = collect($aliases)
+            ->filter(fn ($alias) => ! Str::contains($bootstrapApp, $alias))
+            ->whenNotEmpty(function ($aliases) use ($bootstrapApp) {
+                $aliases = $aliases->map(fn ($name, $alias) => "'$alias' => $name")->implode(','.PHP_EOL.'            ');
+
+                $bootstrapApp = str_replace(
+                    '->withMiddleware(function (Middleware $middleware) {',
+                    '->withMiddleware(function (Middleware $middleware) {'
+                    .PHP_EOL.'        $middleware->alias(['
+                    .PHP_EOL."            $aliases,"
+                    .PHP_EOL.'        ]);'
+                    .PHP_EOL,
+                    $bootstrapApp,
+                );
+
+                file_put_contents(base_path('bootstrap/app.php'), $bootstrapApp);
+            });
+    }
+
     protected function requireComposerPackages(array $packages, $asDev = false)
     {
-        $composer = $this->option('composer');
+        $composer = 'global';
 
         if ($composer !== 'global') {
             $command = ['php', $composer, 'require'];
