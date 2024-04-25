@@ -1,6 +1,6 @@
 <?php
 
-namespace WCast\Dashapp\Console;
+namespace Wcast\Dashapp\Console;
 
 use Illuminate\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

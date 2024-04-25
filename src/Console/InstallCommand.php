@@ -13,7 +13,6 @@ use function Laravel\Prompts\select;
 #[AsCommand(name: 'dashapp:install')]
 class InstallCommand extends Command implements PromptsForMissingInput
 {
-    // use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks, InstallsLivewireStack;
     use InstallsInertiaStacks;
 
     /**

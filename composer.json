@@ -39,6 +39,9 @@
             "email": "rogerio.wcast@gmail.com"
         }
     ],
-    "prefer-stable": true,
-    "minimum-stability": "dev"
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

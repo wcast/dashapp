@@ -3,7 +3,7 @@
         'name' => 'wcast/dashapp',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0600c7fffb252d5a5c4034ef02cdf6eb136fc61a',
+        'reference' => 'ec7e7af7007db1c00626001e0d69f6982f39438f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -1379,7 +1379,7 @@
         'wcast/dashapp' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0600c7fffb252d5a5c4034ef02cdf6eb136fc61a',
+            'reference' => 'ec7e7af7007db1c00626001e0d69f6982f39438f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
