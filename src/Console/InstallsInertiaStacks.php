@@ -69,20 +69,40 @@ trait InstallsInertiaStacks
 
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Middleware'));
         copy(__DIR__ . '/../../stubs/inertia-common/app/Http/Middleware/HandleInertiaRequests.php', app_path('Http/Middleware/HandleInertiaRequests.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Http/Middleware/MakeMenu.php', app_path('Http/Middleware/MakeMenu.php'));
 
         // Views...
         copy(__DIR__ . '/../../stubs/inertia-vue/resources/views/app.blade.php', resource_path('views/app.blade.php'));
 
         @unlink(resource_path('views/welcome.blade.php'));
 
-        // Components + Pages...
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Components'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/Pages'));
+        //Admin Helpers
+        (new Filesystem)->ensureDirectoryExists(app_path('Helpers'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/BreadcrumbHelper.php', app_path('Helpers/BreadcrumbHelper.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/DataFormat.php', app_path('Helpers/DataFormat.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/DataUtilities.php', app_path('Helpers/DataUtilities.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/DataValidation.php', app_path('Helpers/DataValidation.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/File.php', app_path('Helpers/File.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/GitHelper.php', app_path('Helpers/GitHelper.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/MakePDF.php', app_path('Helpers/MakePDF.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Helpers/MenuHelper.php', app_path('Helpers/MenuHelper.php'));
 
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/Components', resource_path('js/Components'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/Layouts', resource_path('js/Layouts'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/Pages', resource_path('js/Pages'));
+        //Admin Controllers
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Admin'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Http/Controllers/Admin/DashboardController.php', app_path('Http/Controllers/Admin/DashboardController.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Http/Controllers/Admin/ProfileController.php', app_path('Http/Controllers/Admin/ProfileController.php'));
+        copy(__DIR__ . '/../../stubs/dashboard/app/Http/Controllers/Admin/UserController.php', app_path('Http/Controllers/Admin/UserController.php'));
+
+        // Components + Pages...
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/apps'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/layouts'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/libs'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/modules'));
+
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/apps', resource_path('js/apps'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/layouts', resource_path('js/layouts'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/libs', resource_path('js/libs'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/modules', resource_path('js/modules'));
 
         if (!$this->option('dark')) {
             $this->removeDarkClasses((new Finder)
@@ -115,7 +135,7 @@ trait InstallsInertiaStacks
         }
 
         $this->line('');
-        $this->components->info('Breeze scaffolding installed successfully.');
+        $this->components->info('Dashapp scaffolding installed successfully.');
     }
 
     /**
