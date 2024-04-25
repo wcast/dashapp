@@ -294,7 +294,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
     {
         $stack = $input->getArgument('stack');
 
-        if (in_array($stack, ['react', 'vue'])) {
+        /*if (in_array($stack, ['react', 'vue'])) {
             collect(multiselect(
                 label: 'Would you like any optional features?',
                 options: [
@@ -314,7 +314,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
                 label: 'Which testing framework do you prefer?',
                 options: ['Pest', 'PHPUnit'],
                 default: $this->isUsingPest() ? 'Pest' : 'PHPUnit',
-            ) === 'Pest');
+            ) === 'Pest');*/
     }
 
     /**

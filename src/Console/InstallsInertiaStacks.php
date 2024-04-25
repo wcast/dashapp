@@ -22,35 +22,35 @@ trait InstallsInertiaStacks
         // NPM Packages...
         $this->updateNodePackages(function ($packages) {
             return [
-                '@inertiajs/vue3' => '^1.0.0',
-                '@inertiajs/progress' => '^0.1.2',
-                '@vitejs/plugin-vue' => '^5.0.0',
-                'autoprefixer' => '^10.4.12',
-                'postcss' => '^8.4.31',
-                '@devindex/vue-mask' => '^2.0.3',
-                '@popperjs/core' => '^2.11.8',
-                '@sweetalert2/theme-bootstrap-4' => '^5.0.16',
-                'bootstrap' => '^5.3.3',
-                'bootstrap-icons' => '^1.11.3',
-                'chart' => '^0.1.2',
-                'feather-icons' => '^4.29.1',
-                'flatpickr' => '^4.6.13',
-                'jquey' => '^0.0.1-security',
-                'jsvectormap' => '^1.5.3',
-                'lodash' => '^4.17.21',
-                'metismenu' => '^3.0.7',
-                'mitt' => '^3.0.1',
-                'rollup-plugin-copy' => '^3.5.0',
-                'sass' => '^1.72.0',
-                'simplebar-vue' => '^2.3.3',
-                'sweetalert2' => '^11.6.13',
-                'v-mask' => '^2.3.0',
-                'vue-draggable-next' => '^2.2.1',
-                'vue-multiselect' => '^2.1.9',
-                'vue3-select2-component' => '^0.1.7',
-                'vue3-summernote-editor' => '^1.0.2',
-                'vue' => '^3.4.0',
-            ] +$packages;
+                    '@inertiajs/vue3' => '^1.0.0',
+                    '@inertiajs/progress' => '^0.1.2',
+                    '@vitejs/plugin-vue' => '^5.0.0',
+                    'autoprefixer' => '^10.4.12',
+                    'postcss' => '^8.4.31',
+                    '@devindex/vue-mask' => '^2.0.3',
+                    '@popperjs/core' => '^2.11.8',
+                    '@sweetalert2/theme-bootstrap-4' => '^5.0.16',
+                    'bootstrap' => '^5.3.3',
+                    'bootstrap-icons' => '^1.11.3',
+                    'chart' => '^0.1.2',
+                    'feather-icons' => '^4.29.1',
+                    'flatpickr' => '^4.6.13',
+                    'jquey' => '^0.0.1-security',
+                    'jsvectormap' => '^1.5.3',
+                    'lodash' => '^4.17.21',
+                    'metismenu' => '^3.0.7',
+                    'mitt' => '^3.0.1',
+                    'rollup-plugin-copy' => '^3.5.0',
+                    'sass' => '^1.72.0',
+                    'simplebar-vue' => '^2.3.3',
+                    'sweetalert2' => '^11.6.13',
+                    'v-mask' => '^2.3.0',
+                    'vue-draggable-next' => '^2.2.1',
+                    'vue-multiselect' => '^2.1.9',
+                    'vue3-select2-component' => '^0.1.7',
+                    'vue3-summernote-editor' => '^1.0.2',
+                    'vue' => '^3.4.0',
+                ] + $packages;
         });
 
         // Controllers...
@@ -105,13 +105,12 @@ trait InstallsInertiaStacks
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/libs', resource_path('js/libs'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/modules', resource_path('js/modules'));
 
-        if (!$this->option('dark')) {
-            $this->removeDarkClasses((new Finder)
-                ->in(resource_path('js'))
-                ->name('*.vue')
-                ->notName('Welcome.vue')
-            );
-        }
+        $this->removeDarkClasses((new Finder)
+            ->in(resource_path('js'))
+            ->name('*.vue')
+            ->notName('Welcome.vue')
+        );
+
 
         // Routes...
         copy(__DIR__ . '/../../stubs/inertia-common/routes/web.php', base_path('routes/web.php'));
