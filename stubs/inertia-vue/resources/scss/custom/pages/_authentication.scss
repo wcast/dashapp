@@ -1,0 +1,29 @@
+//
+// authentication.scss
+//
+
+.bg-pattern {
+    background-image: url("../images/bg-pattern.png");
+    background-size: cover;
+    background-position: center;
+}
+
+// authentication home icon
+.home-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+}
+.bg-login{
+    min-height: 380px;
+    background-color: #f5f2f2;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+a {
+    color: rgb(30, 72, 114);
+    text-decoration: underline;
+}
+
+
