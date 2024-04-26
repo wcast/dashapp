@@ -2,8 +2,6 @@ import { defineConfig, splitVendorChunkPlugin} from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import copy from 'rollup-plugin-copy'
-import path from 'path';
-import webpack from 'webpack';
 
 export default defineConfig({
     chainWebpack: config => {
