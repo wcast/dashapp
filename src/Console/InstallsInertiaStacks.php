@@ -96,23 +96,18 @@ trait InstallsInertiaStacks
 
         // Components + Pages...
         (new Filesystem)->ensureDirectoryExists(resource_path('js/apps'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/layouts'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/libs'));
-        (new Filesystem)->ensureDirectoryExists(resource_path('js/modules'));
-
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/apps', resource_path('js/apps'));
+
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/layouts'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/layouts', resource_path('js/layouts'));
+
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/libs'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/libs', resource_path('js/libs'));
+
+        (new Filesystem)->ensureDirectoryExists(resource_path('js/modules'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/modules', resource_path('js/modules'));
 
-        $this->removeDarkClasses((new Finder)
-            ->in(resource_path('js'))
-            ->name('*.vue')
-            ->notName('Welcome.vue')
-        );
-
-
-        // Routes...
+         // Routes...
         copy(__DIR__ . '/../../stubs/inertia-common/routes/web.php', base_path('routes/web.php'));
         copy(__DIR__ . '/../../stubs/inertia-common/routes/auth.php', base_path('routes/auth.php'));
 
