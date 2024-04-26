@@ -107,7 +107,13 @@ trait InstallsInertiaStacks
         (new Filesystem)->ensureDirectoryExists(resource_path('js/modules'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/js/modules', resource_path('js/modules'));
 
-         // Routes...
+        (new Filesystem)->ensureDirectoryExists(resource_path('scss'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/scss', resource_path('scss'));
+
+        (new Filesystem)->ensureDirectoryExists(resource_path('images'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia-vue/resources/images', resource_path('images'));
+
+        // Routes...
         copy(__DIR__ . '/../../stubs/inertia-common/routes/web.php', base_path('routes/web.php'));
         copy(__DIR__ . '/../../stubs/inertia-common/routes/auth.php', base_path('routes/auth.php'));
 
