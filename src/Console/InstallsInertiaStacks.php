@@ -118,6 +118,8 @@ trait InstallsInertiaStacks
 
         copy(__DIR__ . '/../../stubs/inertia-common/jsconfig.json', base_path('jsconfig.json'));
         copy(__DIR__ . '/../../stubs/inertia-vue/resources/js/app.js', resource_path('js/app.js'));
+        copy(__DIR__ . '/../../stubs/inertia-vue/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
+        copy(__DIR__ . '/../../stubs/inertia-vue/resources/js/helpers.js', resource_path('js/helpers.js'));
 
         $this->components->info('Installing and building Node dependencies.');
 
