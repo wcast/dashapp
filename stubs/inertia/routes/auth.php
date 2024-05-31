@@ -12,48 +12,73 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])
+        ->name('login');
+    Route::post('/admin/login', [AuthenticatedSessionController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
-
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
-
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
-
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->name('password.email');
-
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->name('password.reset');
-
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.store');
+    Route::get('/admin/forgot-password', [PasswordResetLinkController::class, 'create'])
+        ->name('password.request');
+    Route::post('/admin/forgot-password', [PasswordResetLinkController::class, 'store'])
+        ->name('password.email');
+    Route::get('/admin/reset-password/{token}', [NewPasswordController::class, 'create'])
+        ->name('password.reset');
+    Route::post('/admin/reset-password', [NewPasswordController::class, 'store'])
+        ->name('password.store');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
-                ->name('verification.notice');
 
-    Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
-                ->middleware(['signed', 'throttle:6,1'])
-                ->name('verification.verify');
+    Route::get('/admin/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        ->name('dashboard');
 
-    Route::post('email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-                ->middleware('throttle:6,1')
-                ->name('verification.send');
+    Route::get('/admin/verify-email', EmailVerificationPromptController::class)
+        ->name('verification.notice');
 
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-                ->name('password.confirm');
+    Route::get('/admin/verify-email/{id}/{hash}', VerifyEmailController::class)
+        ->middleware(['signed', 'throttle:6,1'])
+        ->name('verification.verify');
 
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
+    Route::post('/admin/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+        ->middleware('throttle:6,1')
+        ->name('verification.send');
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::get('/admin/confirm-password', [ConfirmablePasswordController::class, 'show'])
+        ->name('password.confirm');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+    Route::post('/admin/confirm-password', [ConfirmablePasswordController::class, 'store']);
+
+    Route::put('/admin/password', [PasswordController::class, 'update'])->name('password.update');
+
+    Route::post('/admin/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
+
+    Route::get('/admin/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/admin/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/admin/profile', [\App\Http\Controllers\Admin\ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/admin/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])
+        ->name('users');
+    Route::get('/admin/users/search', [\App\Http\Controllers\Admin\UserController::class, 'search'])
+        ->name('users.search');
+    Route::get('/admin/users/add', [\App\Http\Controllers\Admin\UserController::class, 'add'])
+        ->name('users.add');
+
+    Route::post('/admin/users/add/store', [\App\Http\Controllers\Admin\UserController::class, 'store'])
+        ->name('users.add.store');
+
+    Route::get('/admin/users/edit/{id}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])
+        ->name('users.edit');
+
+    Route::get('/admin/users/account/{id}', [\App\Http\Controllers\Admin\UserController::class, 'account'])
+        ->name('users.account');
+
+    Route::post('/admin/users/update', [\App\Http\Controllers\Admin\UserController::class, 'update'])
+        ->name('users.edit.update');
+
+    Route::post('/admin/users/delete', [\App\Http\Controllers\Admin\UserController::class, 'delete'])
+        ->name('users.delete');
+
+    Route::get('/admin/cep/{cep}', [App\Http\Controllers\Admin\CondominiumController::class, 'getCep'])->name('condominium.zipcode');
+
 });
