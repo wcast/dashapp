@@ -118,7 +118,6 @@ trait installDashApp
         copy(__DIR__ . '/../../stubs/inertia/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__ . '/../../stubs/inertia/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__ . '/../../stubs/inertia/vite.config.js', base_path('vite.config.js'));
-
         copy(__DIR__ . '/../../stubs/inertia/jsconfig.json', base_path('jsconfig.json'));
         copy(__DIR__ . '/../../stubs/inertia/resources/js/app.js', resource_path('js/app.js'));
         copy(__DIR__ . '/../../stubs/inertia/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
