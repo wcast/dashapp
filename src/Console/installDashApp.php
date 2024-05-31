@@ -148,6 +148,17 @@ trait installDashApp
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $target = storage_path('app/uploads');
+        $link = public_path("uploads");
+
+        // Create the symbolic link
+        if (symlink($target, $link)) {
+            echo "Symbolic link created successfully.";
+        } else {
+            echo "Failed to create symbolic link.";
+        }
+
+
         $this->line('');
 
         $this->components->info('Dashapp scaffolding installed successfully.');
