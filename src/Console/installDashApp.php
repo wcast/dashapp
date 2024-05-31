@@ -62,7 +62,7 @@ trait installDashApp
 
         // Requests...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/Http/Requests', app_path('Http/Requests'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Http/Requests', app_path('Http/Requests'));
 
         // Middleware...
         $this->installMiddleware([
@@ -77,6 +77,11 @@ trait installDashApp
         // Views...
         copy(__DIR__ . '/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
         copy(__DIR__ . '/../../stubs/inertia/resources/views/home.blade.php', resource_path('views/home.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/pagination/default.blade.php', resource_path('views/layout/pagination/default.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/default.blade.php', resource_path('views/layout/default.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/footer.blade.php', resource_path('views/layout/footer.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/head.blade.php', resource_path('views/layout/head.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/header.blade.php', resource_path('views/layout/header.blade.php'));
 
         @unlink(resource_path('views/welcome.blade.php'));
 
