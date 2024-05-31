@@ -77,11 +77,13 @@ trait installDashApp
         // Views...
         copy(__DIR__ . '/../../stubs/inertia/resources/views/app.blade.php', resource_path('views/app.blade.php'));
         copy(__DIR__ . '/../../stubs/inertia/resources/views/home.blade.php', resource_path('views/home.blade.php'));
+
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/layout'));
         copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/pagination.blade.php', resource_path('views/layout/pagination.blade.php'));
-        //copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/default.blade.php', resource_path('views/layout/default.blade.php'));
-        //copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/footer.blade.php', resource_path('views/layout/footer.blade.php'));
-        //copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/head.blade.php', resource_path('views/layout/head.blade.php'));
-        //copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/header.blade.php', resource_path('views/layout/header.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/default.blade.php', resource_path('views/layout/default.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/footer.blade.php', resource_path('views/layout/footer.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/head.blade.php', resource_path('views/layout/head.blade.php'));
+        copy(__DIR__ . '/../../stubs/inertia/resources/views/layout/header.blade.php', resource_path('views/layout/header.blade.php'));
 
         @unlink(resource_path('views/welcome.blade.php'));
 
