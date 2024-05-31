@@ -151,16 +151,30 @@ trait installDashApp
             $this->runCommands(['npm install', 'npm run build']);
         }
 
+        $this->line('');
+
+        $this->components->info('Installing folders and symlink...');
+
         $target = storage_path('app/uploads');
         $link = public_path("uploads");
 
-        // Create the symbolic link
-        if (symlink($target, $link)) {
-            echo "Symbolic link created successfully.";
-        } else {
-            echo "Failed to create symbolic link.";
+        if (!is_dir( $target ) ) {
+            $this->components->alert('Folder app/uploads created successfully.');
+            mkdir( $target );
+        }else{
+            $this->components->warn('Folder app/uploads already exists...');
         }
 
+        $this->line('');
+
+        if (!is_dir( $link ) ) {
+            // Create the symbolic link
+            if (symlink($target, $link)) {
+                $this->components->alert('Symbolic link public/uploads created successfully.');
+            } else {
+                $this->components->error('Failed to create public/uploads symbolic link.');
+            }
+        }
 
         $this->line('');
 
