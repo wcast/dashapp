@@ -7,7 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Models\CompanyUser;
 use App\Models\Perfil;
 use App\Models\User;
-use App\Repositories\ImageRepository;
+use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -64,7 +64,7 @@ class UserController extends Controller
         $user->online = false;
         $user->avatar = '@';
         if ($user->save()) {
-            if ($avatar = ImageRepository::makeFromBase64($request->avatar, 'avatar', '/uploads/avatars/', 70, 100)) {
+            if ($avatar = Image::makeFromBase64($request->avatar, 'avatar', '/uploads/avatars/', 70, 100)) {
                 $user->avatar = $avatar;
                 $user->save();
             } else {
@@ -98,7 +98,7 @@ class UserController extends Controller
     public function update(UserRequest $request)
     {
         $user = User::query()->findOrFail($request->id);
-        if ($avatar = ImageRepository::makeFromBase64($request->avatar, 'avatar', '/uploads/avatars/', 70, 100)) {
+        if ($avatar = Image::makeFromBase64($request->avatar, 'avatar', '/uploads/avatars/', 70, 100)) {
             $user->avatar = $avatar;
         }
         $user->name = $request->name;
