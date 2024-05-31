@@ -129,7 +129,7 @@ trait installDashApp
         copy(__DIR__ . '/../../stubs/inertia/routes/web.php', base_path('routes/web.php'));
         copy(__DIR__ . '/../../stubs/inertia/routes/auth.php', base_path('routes/auth.php'));
 
-        // Tailwind / Vite...
+        //  Vite...
         copy(__DIR__ . '/../../stubs/inertia/resources/css/app.css', resource_path('css/app.css'));
         copy(__DIR__ . '/../../stubs/inertia/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__ . '/../../stubs/inertia/vite.config.js', base_path('vite.config.js'));
@@ -137,6 +137,9 @@ trait installDashApp
         copy(__DIR__ . '/../../stubs/inertia/resources/js/app.js', resource_path('js/app.js'));
         copy(__DIR__ . '/../../stubs/inertia/resources/js/bootstrap.js', resource_path('js/bootstrap.js'));
         copy(__DIR__ . '/../../stubs/inertia/resources/js/helpers.js', resource_path('js/helpers.js'));
+
+        //  Config...
+        copy(__DIR__ . '/../../stubs/inertia/config/menu.php', config_path('menu.php'));
 
         $this->components->info('Installing and building Node dependencies.');
 
