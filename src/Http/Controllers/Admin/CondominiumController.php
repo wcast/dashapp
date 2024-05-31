@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Wcast\Dashapp\Models\Images;
 use function session;
 
 class CondominiumController extends Controller
@@ -113,7 +114,7 @@ class CondominiumController extends Controller
     {
         $condominium_photo = Condominium::query()->findOrFail($request->id);
         if ($condominium_photo->save()) {
-            if ($photo = ImageRepository::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
+            if ($photo = Images::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
                 $condominium_photo->default_photo = $photo;
                 $condominium_photo->save();
                 return response()->json([
@@ -133,7 +134,7 @@ class CondominiumController extends Controller
     {
         $condominium_photo = Condominium::query()->findOrFail($request->id);
         if ($condominium_photo->save()) {
-            if ($logomarca = ImageRepository::makeFromBase64($request->photo, 'logo', '/uploads/logomarcas/', 100, 100)) {
+            if ($logomarca = Images::makeFromBase64($request->photo, 'logo', '/uploads/logomarcas/', 100, 100)) {
                 $condominium_photo->logomarca = $logomarca;
                 $condominium_photo->save();
                 return response()->json([
@@ -153,7 +154,7 @@ class CondominiumController extends Controller
     {
         $condominium_photo = Condominium::query()->findOrFail($request->id);
         if ($condominium_photo->save()) {
-            if ($photo = ImageRepository::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
+            if ($photo = Images::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
                 $condominium_photo->second_photo = $photo;
                 $condominium_photo->save();
                 return response()->json([
@@ -175,7 +176,7 @@ class CondominiumController extends Controller
         $condominium_photo->condominium_id = $request->id;
         $condominium_photo->name = $request->name;
         if ($condominium_photo->save()) {
-            if ($photo = ImageRepository::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
+            if ($photo = Images::makeFromBase64($request->photo, 'photo', '/uploads/photos/', 1728, 100)) {
                 $condominium_photo->photo = $photo;
                 $condominium_photo->save();
                 return response()->json([
