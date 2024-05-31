@@ -60,6 +60,11 @@ trait installDashApp
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Http/Controllers', app_path('Http/Controllers'));
 
+        // Models...
+        (new Filesystem)->ensureDirectoryExists(app_path('Http/Models'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Models', app_path('Http/Models'));
+
+
         // Requests...
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Requests'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Http/Requests', app_path('Http/Requests'));
