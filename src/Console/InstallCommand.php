@@ -21,7 +21,7 @@ use function Laravel\Prompts\select;
 #[AsCommand(name: 'dashapp:install')]
 class InstallCommand extends Command implements PromptsForMissingInput
 {
-    use InstallsInertiaStacks;
+    use installDashApp;
 
     /**
      * The name and signature of the console command.
@@ -44,7 +44,7 @@ class InstallCommand extends Command implements PromptsForMissingInput
      */
     public function handle()
     {
-        return $this->installInertiaVueStack();
+        return $this->installDashApp();
     }
 
     /**

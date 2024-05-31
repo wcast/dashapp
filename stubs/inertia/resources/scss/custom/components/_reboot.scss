@@ -1,0 +1,70 @@
+/* =============
+   General
+============= */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body{
+    font-family: "Google Sans",Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+    font-size: 0.9em;
+}
+
+.h1,.h2,.h3,.h4,.h5,.h6,
+h1,h2,h3,h4,h5,h6 {
+  color: $black;
+  font-weight: $font-weight-medium;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+label {
+  font-weight: $font-weight-medium;
+}
+
+// blockquote
+
+.blockquote {
+  padding: 10px 20px;
+  border-left: 4px solid $gray-300;
+  font-size: 13px;
+}
+
+.blockquote-reverse {
+  border-left: 0;
+  border-right: 4px solid $gray-300;
+  text-align: right;
+}
+
+.pull-right{
+    float: right;
+}
+
+.pull-left{
+    float: right;
+}
+
+display-only {
+    display: none !important;
+    &.mobile {
+        @media only screen and (max-width: 992px) {
+            display: block !important;
+        }
+    }
+    &.deskstop {
+        @media only screen and (min-width: 992px) {
+            display: block !important;
+        }
+    }
+}
+
+.list-search{
+    & a{
+        color: #414040 !important;
+    }
+}
+
