@@ -15,7 +15,7 @@ trait installDashApp
     protected function installDashApp()
     {
         // Arquivo Env
-        copy(__DIR__ . '/../../.env', app_path('.env'));
+        copy(__DIR__ . '/../../.env', base_path('.env'));
 
         // Install inertiajs/inertia-laravel, laravel/sanctum, tightenco/ziggy
 
