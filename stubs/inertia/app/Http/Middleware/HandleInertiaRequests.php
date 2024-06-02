@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Helpers\BreadcrumbHelper;
+use App\Helpers\GitHelper;
 use App\Helpers\MenuHelper;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -50,10 +51,17 @@ class HandleInertiaRequests extends Middleware
             $id = Auth::user()->id;
         }
 
+        $git = new GitHelper();
+
         return array_merge(parent::share($request), [
             'config' => fn () => [
                 'app' => [
                     'name' => config('app.name'),
+                    'env' => config('app.env'),
+                    'debug' => config('app.debug'),
+                    'timezone' => config('app.timezone'),
+                    'locale' => config('app.locale'),
+                    'version' => $git->getVersion()
                 ],
             ],
             'flash' => [
