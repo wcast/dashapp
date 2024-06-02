@@ -11,11 +11,6 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
-    public function __construct(Request $request)
-    {
-
-    }
-
     public function index()
     {
         return view('home', [
