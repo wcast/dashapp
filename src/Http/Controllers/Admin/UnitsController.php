@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
-use App\Models\Condominium;
-use App\Models\Properties;
-use App\Models\Units;
 use App\Models\Zipcodes;
+use Condominium;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Properties;
+use Units;
 use function session;
 
 class UnitsController extends Controller

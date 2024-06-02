@@ -14,6 +14,9 @@ trait installDashApp
      */
     protected function installDashApp()
     {
+        // Arquivo Env
+        copy(__DIR__ . '/../../.env', app_path('.env'));
+
         // Install inertiajs/inertia-laravel, laravel/sanctum, tightenco/ziggy
 
         if (!$this->requireComposerPackages(['inertiajs/inertia-laravel:^1.0', 'laravel/sanctum:^4.0', 'tightenco/ziggy:^2.0'])) {
@@ -62,7 +65,7 @@ trait installDashApp
 
         // Models...
         (new Filesystem)->ensureDirectoryExists(app_path('Models'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Models', app_path('Models'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/inertia/app/Models/DashApp', app_path('Models'));
 
         // Traits...
         (new Filesystem)->ensureDirectoryExists(app_path('Traits'));
@@ -140,6 +143,7 @@ trait installDashApp
 
         //  Config...
         copy(__DIR__ . '/../../stubs/inertia/config/menu.php', config_path('menu.php'));
+        copy(__DIR__ . '/../../stubs/inertia/config/database.php', config_path('database.php'));
 
         $this->components->info('Installing and building Node dependencies.');
 

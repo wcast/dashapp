@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Dashapp\Perfil;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -86,7 +87,7 @@ class User extends Authenticatable
 
     protected static function booted()
     {
-        static::creating(fn(User $user) => $user->id = (string)Uuid::uuid4());
+        static::creating(fn(Dashapp\User $user) => $user->id = (string)Uuid::uuid4());
     }
 
     public function search()

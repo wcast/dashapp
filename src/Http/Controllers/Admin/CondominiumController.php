@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\CondominiumsPhotos;
-use App\Models\Condominium;
-use App\Models\Fotos;
-use App\Models\Properties;
-use App\Repositories\ImageRepository;
+use Condominium;
+use CondominiumsPhotos;
+use Fotos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Properties;
 use Wcast\Dashapp\Models\Images;
 use function session;
 

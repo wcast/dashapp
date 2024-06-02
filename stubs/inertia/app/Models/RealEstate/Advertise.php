@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Candidate extends Model
+class Advertise extends Model
 {
-    protected $fillable = ["role", "name", "email", "phone", "address", "number", "complement", "district", "city", "state", "cep", "curriculum", "notes", "source"];
+    protected $fillable = ["type", "name", "email", "phone", "address", "number", "complement", "district", "city", "state", "cep", "category", "bedrooms", "parking", "area", "sale_price", "rent_price", "iptu", "condominium", "notes", "source"];
 
     public static function rules()
     {
@@ -16,9 +15,9 @@ class Candidate extends Model
             "data.phone" => "required",
             "data.city" => "required",
             "data.state" => "required",
-            "data.role" => "required",
-            "data.curriculum" => "required",
-            "data.source" => "required"
+            "data.source" => "required",
+            "data.documents.*" => "file|max:3072",
+            "data.photos.*" => "file|max:3072"
         ];
     }
 
@@ -31,9 +30,9 @@ class Candidate extends Model
             "data.phone.required" => "Obrigatório",
             "data.city.required" => "Obrigatório",
             "data.state.required" => "Obrigatório",
-            "data.role.required" => "Obrigatório",
-            "data.curriculum.required" => "Obrigatório",
-            "data.source.required" => "Obrigatório"
+            "data.source.required" => "Obrigatório",
+            "data.documents.*" => "Um arquivo excedeu o tamanho máximo de 8MB",
+            "data.photos.*" => "Um arquivo excedeu o tamanho máximo de 8MB"
         ];
     }
 }

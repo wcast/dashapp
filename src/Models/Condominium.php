@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use App\Traits\Uuids;
+use City;
+use CondominiumsPhotos;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Request;
 use Laravel\Sanctum\HasApiTokens;
+use Units;
 
 class Condominium extends Model
 {

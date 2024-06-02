@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Request;
 
 class Properties extends Model
 {
@@ -84,14 +82,14 @@ class Properties extends Model
         'url'
     ];
 
-    public function features(): HasMany
+    public function features(): \App\Models\HasMany
     {
-        return $this->hasMany(Features::class);
+        return $this->hasMany(\App\Models\Features::class);
     }
 
-    public function infrastructures(): HasMany
+    public function infrastructures(): \App\Models\HasMany
     {
-        return $this->hasMany(Infrastructures::class);
+        return $this->hasMany(\App\Models\Infrastructures::class);
     }
 
     public function fotos()
@@ -99,7 +97,7 @@ class Properties extends Model
         return $this->hasMany(Fotos::class);
     }
 
-    public function brokers(): HasMany
+    public function brokers(): \App\Models\HasMany
     {
         return $this->hasMany(Brokers::class);
     }

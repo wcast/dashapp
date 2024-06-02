@@ -2,16 +2,14 @@
 
 namespace App\Repositories;
 
-use App\Models\Brokers;
-use App\Models\Fotos;
-use App\Models\Integration;
-use App\Models\Properties;
-
+use App\Models\Dashapp\Integration;
+use Brokers;
+use Fotos;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Config;
+use Properties;
 
 class VistaApiRepository
 {

@@ -23,10 +23,6 @@ import '@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 
 import Sortable from 'sortablejs';
 
-import * as buffer from "buffer";
-
-window.Buffer = buffer.Buffer;
-
 window.jQuery = jQuery
 window.$ = jQuery
 window.bootstrap = bootstrap
@@ -34,7 +30,6 @@ window._ = _;
 window.metismenu = metismenu;
 window.swal = swal;
 window.sortable = Sortable;
-
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

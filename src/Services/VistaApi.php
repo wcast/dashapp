@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\Properties;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Properties;
 
 class VistaApi extends Component
 {

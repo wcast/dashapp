@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -60,7 +59,7 @@ class Brokers extends Model
         'url'
     ];
 
-    public function properties(): HasMany
+    public function properties(): \App\Models\HasMany
     {
         return $this->hasMany(Properties::class);
     }

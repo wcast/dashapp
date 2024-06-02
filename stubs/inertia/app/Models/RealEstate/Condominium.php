@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Models;
 
-use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -102,7 +100,7 @@ class Condominium extends Model
 
     public function state()
     {
-        return $this->hasOne(State::class, 'id', 'state_id');
+        return $this->hasOne(\App\Models\State::class, 'id', 'state_id');
     }
 
     public function city()
@@ -112,7 +110,7 @@ class Condominium extends Model
 
     public function zipcode()
     {
-        return $this->hasOne(Zipcodes::class, 'id', 'zipcode_id');
+        return $this->hasOne(\App\Models\Zipcodes::class, 'id', 'zipcode_id');
     }
     public function photos()
     {
@@ -124,7 +122,7 @@ class Condominium extends Model
     }
     public function atlantida()
     {
-        return $this->hasOne(Atlantida::class, 'id', 'atlantida_id');
+        return $this->hasOne(\App\Models\Atlantida::class, 'id', 'atlantida_id');
     }
 
     public static function rules()
