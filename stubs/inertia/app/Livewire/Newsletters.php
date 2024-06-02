@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace app\Livewire;
 
 use App\Mail\NewsletterMail;
 use App\Services\Utils;
