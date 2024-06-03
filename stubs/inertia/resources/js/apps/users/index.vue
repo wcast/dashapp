@@ -153,7 +153,7 @@ const deleteItem = (id) => {
                         <tbody>
                         <tr v-for="item in users.data" :key="item.id">
                             <td class="text-center">
-                                <img :src="ifExistFile(item.avatar)" alt="user" class="avatar-xs rounded-pill"/>
+                                <img :src="ifExistFile(item.avatar)" alt="user" class="avatar-xs"/>
                             </td>
                             <td>
                                 <h5 class="font-size-15 mb-0">{{ item.name }}</h5>
