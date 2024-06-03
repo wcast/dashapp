@@ -107,7 +107,7 @@ const deleteItem = (id) => {
                                         <div class="media">
                                             <div class="media-body">
                                                 <h5 class="font-size-14">
-                                                    <img :src="item.avatar" alt="user" class="avatar-xs rounded-circle"/>
+                                                    <img :src="item.avatar" alt="user" class="avatar-xs"/>
                                                     {{ item.name }}
                                                     <i v-if="item.status == 'A'" alt="Ativo" class="mdi mdi-check-circle text-success mr-1" title="Ativo"></i>
                                                     <i v-if="item.status == 'S'" alt="Desativado" class="mdi mdi-alert-circle text-warning mr-1" title="Desativado"></i>
