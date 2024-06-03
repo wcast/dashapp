@@ -107,7 +107,7 @@ const deleteItem = (id) => {
                                         <div class="media">
                                             <div class="media-body">
                                                 <h5 class="font-size-14">
-                                                    <img :src="item.avatar" alt="user" class="avatar-xs"/>
+                                                    <img :src="item.avatar" alt="user" class="mini-logo"/>
                                                     {{ item.name }}
                                                     <i v-if="item.status == 'A'" alt="Ativo" class="mdi mdi-check-circle text-success mr-1" title="Ativo"></i>
                                                     <i v-if="item.status == 'S'" alt="Desativado" class="mdi mdi-alert-circle text-warning mr-1" title="Desativado"></i>
@@ -153,7 +153,7 @@ const deleteItem = (id) => {
                         <tbody>
                         <tr v-for="item in users.data" :key="item.id">
                             <td class="text-center">
-                                <img :src="ifExistFile(item.avatar)" alt="user" class="avatar-xs"/>
+                                <img :src="ifExistFile(item.avatar)" alt="user" class="mini-logo"/>
                             </td>
                             <td>
                                 <h5 class="font-size-15 mb-0">{{ item.name }}</h5>
