@@ -92,17 +92,11 @@ class User extends Authenticatable
 
     public function search()
     {
-        $request = Request::query('search');
-
+        $search = Request::query('search');
         $query = self::query();
-
-        if(isset($request['_value'])){
-
-            $value = $request['_value'];
-
+        if(isset($search) && $search != ''){
             foreach ($this->getFillable() as $field) {
-
-                $query->orWhere($field, 'like', '%' . trim($value) . '%');
+                $query->orWhere($field, 'like', '%' . trim($search) . '%');
             }
         }
         return $query;

@@ -19,15 +19,10 @@ let delayTimeout;
 watch(search, value => {
     clearTimeout(delayTimeout);
     delayTimeout = setTimeout(() => {
-        Inertia.get(url, {
-            search: value,
-        }, {
-            preserveState: true,
-            replace: true,
-        });
+        console.log(value);
+        router.get(url, {search: value}, {preserveState: true, preserveScroll: true}, 300);
     }, 500);
 })
-
 const submit = () => {
     form.post(route('condominium.units.store'), {
         preserveState: true,
