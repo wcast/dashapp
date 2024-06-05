@@ -23,11 +23,9 @@ class UserController extends Controller
         $user = new User();
         $query = $user->search();
         $users = $query->paginate(50);
-        $perfis = Perfil::all();
         return Inertia::render('users/index', [
             'user' => Auth::user(),
-            'users' => $users,
-            'perfis' => $perfis
+            'users' => $users
         ]);
     }
 

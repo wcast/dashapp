@@ -48,10 +48,6 @@ class UserRequest extends FormRequest
             'avatar' => [
                 'string'
             ],
-            'perfil_id' => [
-                'required',
-                'integer'
-            ]
         ];
     }
 }
