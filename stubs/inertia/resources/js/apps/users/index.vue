@@ -102,8 +102,7 @@ const deleteItem = (id) => {
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xl-6 pull-left mb-3">
                         <div class="form-group">
-                                <input v-model="search" class="form-control form-control-inline" name="search" @keyup="goSearch">
-                                <button class="btn btn-primary mt-2" @click="goSearch">Pesquisar</button>
+                                <input v-model="search" class="form-control form-control-inline" name="search">
                         </div>
                     </div>
                 </div>
