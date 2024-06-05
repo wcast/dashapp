@@ -105,17 +105,6 @@ class User extends Authenticatable
                 $query->orWhere($field, 'like', '%' . trim($value) . '%');
             }
         }
-
         return $query;
-    }
-
-    public function module()
-    {
-        return $this->hasMany(UserModule::class, 'user_id', 'id');
-    }
-
-    public function perfil()
-    {
-        return $this->hasOne(Perfil::class, 'id', 'perfil_id');
     }
 }

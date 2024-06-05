@@ -22,10 +22,7 @@ class UserController extends Controller
     {
         $user = new User();
         $query = $user->search();
-        $query->with('perfil');
-
         $users = $query->paginate(50);
-
         $perfis = Perfil::all();
         return Inertia::render('users/index', [
             'user' => Auth::user(),
@@ -38,17 +35,13 @@ class UserController extends Controller
     {
         $user = new User();
         $query = $user->search();
-        $query->with('perfil');
         $users = $query->paginate(50);
         return json_encode($users);
     }
 
     public function add()
     {
-        $perfis = Perfil::all();
-        return Inertia::render('users/add', [
-            'perfis' => $perfis,
-        ]);
+        return Inertia::render('users/add');
     }
 
     public function store(UserRequest $request)
@@ -58,7 +51,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->mobile = $request->mobile;
         $user->phone = $request->phone;
-        $user->perfil_id = $request->perfil_id;
         $user->status = $request->status;
         $user->password = Hash::make('1q2w3e4r');
         $user->online = false;
@@ -77,20 +69,16 @@ class UserController extends Controller
 
     public function edit($id = null)
     {
-        $perfis = Perfil::all();
         $user = User::query()->findOrFail($id);
         return Inertia::render('users/edit', [
-            'perfis' => $perfis,
             'user' => $user
         ]);
     }
 
     public function account($id = null)
     {
-        $perfis = Perfil::all();
         $user = User::query()->findOrFail($id);
         return Inertia::render('users/account', [
-            'perfis' => $perfis,
             'user' => $user
         ]);
     }
@@ -105,7 +93,6 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->mobile = $request->mobile;
         $user->phone = $request->phone;
-        $user->perfil_id = $request->perfil_id;
         $user->status = $request->status;
         if ($user->save()) {
             return session()->flash('success', 'Registro atualizado com sucesso!');
