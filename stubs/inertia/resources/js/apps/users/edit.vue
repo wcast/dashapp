@@ -5,8 +5,7 @@ import {computed} from "vue";
 import ifExistFile from "@/helpers";
 
 const props = defineProps({
-    user: Object,
-    perfis: Object,
+    user: Object
 });
 
 const form = useForm(props.user);
@@ -88,14 +87,6 @@ const createImage = (file) => {
                                     <label for="validationCustom02">Celular</label>
                                     <input v-mask="'(99) 99999-9999'" v-model="form.mobile" type="text" class="form-control" placeholder="Celular">
                                     <invalid_feedback :message="form.errors.mobile"/>
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xl-6 mb-3">
-                                    <label>Perfil</label>
-                                    <select v-model="form.perfil_id" class="form-control" required>
-                                        <option value=""> Selecione</option>
-                                        <option v-for="(perfil, i) in props.perfis" :key="i" :value="perfil.id">{{ perfil.name }}</option>
-                                    </select>
-                                    <invalid_feedback :message="form.errors.perfil_id"/>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12 col-xl-6 mb-3">
                                     <label>Status</label>
