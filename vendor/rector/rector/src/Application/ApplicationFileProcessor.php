@@ -3,11 +3,13 @@
 declare (strict_types=1);
 namespace Rector\Application;
 
-use RectorPrefix202404\Nette\Utils\FileSystem as UtilsFileSystem;
+use RectorPrefix202405\Nette\Utils\FileSystem as UtilsFileSystem;
+use Rector\Caching\Cache;
 use Rector\Caching\Detector\ChangedFilesDetector;
 use Rector\Configuration\Option;
 use Rector\Configuration\Parameter\SimpleParameterProvider;
 use Rector\Configuration\VendorMissAnalyseGuard;
+use Rector\NodeTypeResolver\Reflection\BetterReflection\SourceLocatorProvider\DynamicSourceLocatorProvider;
 use Rector\Parallel\Application\ParallelFileProcessor;
 use Rector\Provider\CurrentFileProvider;
 use Rector\Testing\PHPUnit\StaticPHPUnitEnvironment;
@@ -19,11 +21,11 @@ use Rector\ValueObject\FileProcessResult;
 use Rector\ValueObject\ProcessResult;
 use Rector\ValueObject\Reporting\FileDiff;
 use Rector\ValueObjectFactory\Application\FileFactory;
-use RectorPrefix202404\Symfony\Component\Console\Input\InputInterface;
-use RectorPrefix202404\Symfony\Component\Console\Style\SymfonyStyle;
-use RectorPrefix202404\Symplify\EasyParallel\CpuCoreCountProvider;
-use RectorPrefix202404\Symplify\EasyParallel\Exception\ParallelShouldNotHappenException;
-use RectorPrefix202404\Symplify\EasyParallel\ScheduleFactory;
+use RectorPrefix202405\Symfony\Component\Console\Input\InputInterface;
+use RectorPrefix202405\Symfony\Component\Console\Style\SymfonyStyle;
+use RectorPrefix202405\Symplify\EasyParallel\CpuCoreCountProvider;
+use RectorPrefix202405\Symplify\EasyParallel\Exception\ParallelShouldNotHappenException;
+use RectorPrefix202405\Symplify\EasyParallel\ScheduleFactory;
 use Throwable;
 final class ApplicationFileProcessor
 {
@@ -78,6 +80,16 @@ final class ApplicationFileProcessor
      */
     private $vendorMissAnalyseGuard;
     /**
+     * @readonly
+     * @var \Rector\NodeTypeResolver\Reflection\BetterReflection\SourceLocatorProvider\DynamicSourceLocatorProvider
+     */
+    private $dynamicSourceLocatorProvider;
+    /**
+     * @readonly
+     * @var \Rector\Caching\Cache
+     */
+    private $cache;
+    /**
      * @var string
      */
     private const ARGV = 'argv';
@@ -85,7 +97,7 @@ final class ApplicationFileProcessor
      * @var SystemError[]
      */
     private $systemErrors = [];
-    public function __construct(SymfonyStyle $symfonyStyle, FileFactory $fileFactory, ParallelFileProcessor $parallelFileProcessor, ScheduleFactory $scheduleFactory, CpuCoreCountProvider $cpuCoreCountProvider, ChangedFilesDetector $changedFilesDetector, CurrentFileProvider $currentFileProvider, \Rector\Application\FileProcessor $fileProcessor, ArrayParametersMerger $arrayParametersMerger, VendorMissAnalyseGuard $vendorMissAnalyseGuard)
+    public function __construct(SymfonyStyle $symfonyStyle, FileFactory $fileFactory, ParallelFileProcessor $parallelFileProcessor, ScheduleFactory $scheduleFactory, CpuCoreCountProvider $cpuCoreCountProvider, ChangedFilesDetector $changedFilesDetector, CurrentFileProvider $currentFileProvider, \Rector\Application\FileProcessor $fileProcessor, ArrayParametersMerger $arrayParametersMerger, VendorMissAnalyseGuard $vendorMissAnalyseGuard, DynamicSourceLocatorProvider $dynamicSourceLocatorProvider, Cache $cache)
     {
         $this->symfonyStyle = $symfonyStyle;
         $this->fileFactory = $fileFactory;
@@ -97,6 +109,8 @@ final class ApplicationFileProcessor
         $this->fileProcessor = $fileProcessor;
         $this->arrayParametersMerger = $arrayParametersMerger;
         $this->vendorMissAnalyseGuard = $vendorMissAnalyseGuard;
+        $this->dynamicSourceLocatorProvider = $dynamicSourceLocatorProvider;
+        $this->cache = $cache;
     }
     public function run(Configuration $configuration, InputInterface $input) : ProcessResult
     {
@@ -109,6 +123,9 @@ final class ApplicationFileProcessor
         if ($filePaths === []) {
             return new ProcessResult([], []);
         }
+        // ensure clear classnames collection caches on repetitive call
+        $key = $this->dynamicSourceLocatorProvider->getCacheClassNameKey();
+        $this->cache->clean($key);
         $this->configureCustomErrorHandler();
         /**
          * Mimic @see https://github.com/phpstan/phpstan-src/blob/ab154e1da54d42fec751e17a1199b3e07591e85e/src/Command/AnalyseApplication.php#L188C23-L244
@@ -132,6 +149,8 @@ final class ApplicationFileProcessor
         } else {
             $preFileCallback = null;
         }
+        // trigger cache class names collection
+        $this->dynamicSourceLocatorProvider->provide();
         if ($configuration->isParallel()) {
             $processResult = $this->runParallel($filePaths, $configuration, $input, $postFileCallback);
         } else {

@@ -9,10 +9,10 @@
  * the LICENSE file that was distributed with this source code.
  */
 declare (strict_types=1);
-namespace RectorPrefix202404\Composer\XdebugHandler;
+namespace RectorPrefix202405\Composer\XdebugHandler;
 
-use RectorPrefix202404\Composer\Pcre\Preg;
-use RectorPrefix202404\Psr\Log\LoggerInterface;
+use RectorPrefix202405\Composer\Pcre\Preg;
+use RectorPrefix202405\Psr\Log\LoggerInterface;
 /**
  * @author John Stevenson <john-stevenson@blueyonder.co.uk>
  *
@@ -469,6 +469,10 @@ class XdebugHandler
     {
         if (!\function_exists('proc_open')) {
             $info = 'proc_open function is disabled';
+            return \false;
+        }
+        if (!\file_exists(\PHP_BINARY)) {
+            $info = 'PHP_BINARY is not available';
             return \false;
         }
         if (\extension_loaded('uopz') && !(bool) \ini_get('uopz.disable')) {

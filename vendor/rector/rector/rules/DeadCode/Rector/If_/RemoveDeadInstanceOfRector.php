@@ -17,9 +17,11 @@ use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Expression;
 use PhpParser\Node\Stmt\If_;
 use PhpParser\NodeTraverser;
+use PHPStan\Reflection\ClassReflection;
 use PHPStan\Type\MixedType;
 use Rector\NodeManipulator\IfManipulator;
 use Rector\Rector\AbstractRector;
+use Rector\Reflection\ReflectionResolver;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
@@ -32,9 +34,15 @@ final class RemoveDeadInstanceOfRector extends AbstractRector
      * @var \Rector\NodeManipulator\IfManipulator
      */
     private $ifManipulator;
-    public function __construct(IfManipulator $ifManipulator)
+    /**
+     * @readonly
+     * @var \Rector\Reflection\ReflectionResolver
+     */
+    private $reflectionResolver;
+    public function __construct(IfManipulator $ifManipulator, ReflectionResolver $reflectionResolver)
     {
         $this->ifManipulator = $ifManipulator;
+        $this->reflectionResolver = $reflectionResolver;
     }
     public function getRuleDefinition() : RuleDefinition
     {
@@ -126,6 +134,10 @@ CODE_SAMPLE
         }
         // handled in another rule
         if ($this->isPropertyFetch($instanceof->expr) || $instanceof->expr instanceof CallLike) {
+            return null;
+        }
+        $classReflection = $this->reflectionResolver->resolveClassReflection($instanceof);
+        if ($classReflection instanceof ClassReflection && $classReflection->isTrait()) {
             return null;
         }
         $classType = $this->nodeTypeResolver->getType($instanceof->class);

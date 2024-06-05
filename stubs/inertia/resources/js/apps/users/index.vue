@@ -145,7 +145,9 @@ const deleteItem = (id) => {
                             <th scope="col">Nome / E-mail</th>
                             <th scope="col">Telefone</th>
                             <th scope="col">Celular</th>
+<!--
                             <th class="text-center" scope="col">Perfil</th>
+-->
                             <th class="text-center" scope="col" width="5">Status</th>
                             <th class="text-center" scope="col">Ações</th>
                         </tr>
@@ -161,7 +163,9 @@ const deleteItem = (id) => {
                             </td>
                             <td><p class="mb-1 font-size-12">{{ item.phone }}</p></td>
                             <td><p class="mb-1 font-size-12">{{ item.mobile }}</p></td>
+<!--
                             <td class="text-center"><p class="mb-1 font-size-12">{{ item.perfil.sigla }}</p></td>
+-->
                             <td class="text-center">
                                 <i v-if="item.status == 'A'" alt="Ativo" class="mdi mdi-check-circle text-success mr-1" title="Ativo"></i>
                                 <i v-if="item.status == 'S'" alt="Desativado" class="mdi mdi-alert-circle text-warning mr-1" title="Desativado"></i>

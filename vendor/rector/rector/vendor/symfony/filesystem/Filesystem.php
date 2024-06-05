@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace RectorPrefix202404\Symfony\Component\Filesystem;
+namespace RectorPrefix202405\Symfony\Component\Filesystem;
 
-use RectorPrefix202404\Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use RectorPrefix202404\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
-use RectorPrefix202404\Symfony\Component\Filesystem\Exception\IOException;
+use RectorPrefix202405\Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use RectorPrefix202405\Symfony\Component\Filesystem\Exception\InvalidArgumentException;
+use RectorPrefix202405\Symfony\Component\Filesystem\Exception\IOException;
 /**
  * Provides basic utility to manipulate the file system.
  *
@@ -594,7 +594,7 @@ class Filesystem
             if (\false === self::box('file_put_contents', $tmpFile, $content)) {
                 throw new IOException(\sprintf('Failed to write file "%s": ', $filename) . self::$lastError, 0, null, $filename);
             }
-            self::box('chmod', $tmpFile, \file_exists($filename) ? \fileperms($filename) : 0666 & ~\umask());
+            self::box('chmod', $tmpFile, @\fileperms($filename) ?: 0666 & ~\umask());
             $this->rename($tmpFile, $filename, \true);
         } finally {
             if (\file_exists($tmpFile)) {

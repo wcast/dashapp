@@ -5,12 +5,13 @@
     "type": "library",
     "require": {
         "php": "^8.2.0",
-        "laravel/breeze": "^2.0",
-        "lucascudo/laravel-pt-br-localization": "^2.1",
         "illuminate/console": "^11.0",
         "illuminate/filesystem": "^11.0",
         "illuminate/support": "^11.0",
         "illuminate/validation": "^11.0",
+        "laravel/breeze": "^2.0",
+        "livewire/livewire": "^3.5",
+        "lucascudo/laravel-pt-br-localization": "^2.1",
         "symfony/console": "^7.0"
     },
     "require-dev": {
