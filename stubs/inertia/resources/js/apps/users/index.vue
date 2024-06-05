@@ -1,12 +1,11 @@
 <script setup>
-import {computed, ref} from 'vue'
+import {computed, ref, watch} from 'vue'
 import {Head, Link, router, usePage} from '@inertiajs/vue3';
 import {InertiaProgress} from '@inertiajs/progress'
 import ifExistFile from '@/helpers';
 
 const props = defineProps({
     users: Object,
-    perfis: Object,
 });
 
 let loading = ref('')
@@ -15,9 +14,19 @@ const search = ref(''); //Should really load it from the query string
 
 const url = route('users');
 
-const goSearch = () => {
-    router.get(url, {search: search}, {preserveState: true, preserveScroll: true}, 300);
-}
+let delayTimeout;
+
+watch(search, value => {
+    clearTimeout(delayTimeout);
+    delayTimeout = setTimeout(() => {
+        Inertia.get(url, {
+            search: value,
+        }, {
+            preserveState: true,
+            replace: true,
+        });
+    }, 500);
+})
 
 const submit = () => {
     form.post(route('condominium.units.store'), {
